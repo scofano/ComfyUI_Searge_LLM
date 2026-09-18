@@ -1,4 +1,3 @@
-transformers>=4.0.0
-torch>=1.7.1
-accelerate
-llama-cpp-python
+--extra-index-url https://abetlen.github.io/llama-cpp-python/whl/vulkan
+--only-binary llama-cpp-python
+llama-cpp-python==0.3.35

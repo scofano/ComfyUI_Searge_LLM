@@ -1,19 +1,13 @@
-import importlib
 import os
 
 import folder_paths
+from llama_cpp import Llama
 
 GLOBAL_MODELS_DIR = os.path.join(folder_paths.models_dir, "llm_gguf")
 
 WEB_DIRECTORY = "./web/assets/js"
 
 DEFAULT_INSTRUCTIONS = 'Generate a prompt from "{prompt}"'
-
-try:
-    Llama = importlib.import_module("llama_cpp_cuda").Llama
-except ImportError:
-    Llama = importlib.import_module("llama_cpp").Llama
-
 
 class AnyType(str):
     """A special class that is always equal in not equal comparisons. Credit to pythongosssss"""
