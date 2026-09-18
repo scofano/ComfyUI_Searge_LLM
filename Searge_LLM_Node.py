@@ -167,6 +167,12 @@ class Searge_LLM_Node:
                                 f"\nDescription : {text}"},
                 ]
 
+            # Chat templates embedded in some GGUFs (e.g. Mistral v0.3) reject a "system" role,
+            # so fold the system prompt into the first user message instead.
+            if messages[0]["role"] == "system":
+                system_prompt = messages.pop(0)["content"]
+                messages[0] = {"role": "user", "content": f"{system_prompt}\n\n{messages[0]['content']}"}
+
             llm_result = model_to_use.create_chat_completion(messages, **generate_kwargs)
 
             return (llm_result['choices'][0]['message']['content'].strip(), text)
